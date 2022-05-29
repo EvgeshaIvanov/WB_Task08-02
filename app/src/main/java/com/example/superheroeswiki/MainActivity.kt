@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         heroesAdapter.onClickHeroListener = { hero ->
             Log.i("HERO_CLICK_INFO", "${hero.name}, full name - ${hero.biography.fullName}")
             val intent = Intent(this, HeroDetailActivity::class.java)
-            intent.putExtra("HERO_NAME", hero.name)
-            intent.putExtra("HERO_PLACE_OF_BIRTH", hero.biography.placeOfBirth)
+            intent.putExtra("HERO_NAME", hero)
+
             startActivity(intent)
         }
 

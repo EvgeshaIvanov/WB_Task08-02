@@ -3,12 +3,14 @@
     <string name="hero_name_text">hero_name</string>
     <string name="title_activity_hero_detail">HeroDetailActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="place_of_birth_text">place_of_birth</string>
+    <string name="place_of_birth_text">Место рождения:</string>
+    <string name="full_name_text">Полное имя:</string>
+    <string name="publisher_text">Издатель:</string>
+    <string name="gender_text">Пол:</string>
+    <string name="race_text">Раса:</string>
+    <string name="full_name_hero_info">full_name_hero_text</string>
+    <string name="gender_info">gender_info</string>
+    <string name="race_info">race_info</string>
+    <string name="place_of_birth_info">place_of_birth_info</string>
+    <string name="publisher_info">publisher_info</string>
 </resources>

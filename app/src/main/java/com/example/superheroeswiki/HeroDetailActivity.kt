@@ -2,7 +2,10 @@ package com.example.superheroeswiki
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import com.example.superheroeswiki.databinding.ActivityHeroDetailBinding
+import com.example.superheroeswiki.model.HeroData
+import com.squareup.picasso.Picasso
 
 class HeroDetailActivity : AppCompatActivity() {
 
@@ -12,9 +15,35 @@ class HeroDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHeroDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val heroName = intent.getStringExtra("HERO_NAME")
-        val heroPlaceOfBirth = intent.getStringExtra("HERO_PLACE_OF_BIRTH")
-        binding.heroName.text = heroName
-        binding.placeOfBirth.text = heroPlaceOfBirth
+        val heroDetails = intent.getParcelableExtra<HeroData>("HERO_NAME")!!
+
+        binding.apply {
+            setImage(heroDetails.image.url, heroImage)
+            heroName.text = heroDetails.name
+            if (heroDetails.biography.fullName.contains("")) {
+                fullNameHeroInfo.text = MISS_TEXT
+            } else fullNameHeroInfo.text = heroDetails.biography.fullName
+            genderInfo.text = heroDetails.appearance.gender
+            if (heroDetails.appearance.race.contains("null")) {
+                raceInfo.text = MISS_TEXT
+            } else raceInfo.text = heroDetails.appearance.race
+            placeOfBirthInfo.text = heroDetails.biography.placeOfBirth
+            publisherInfo.text = heroDetails.biography.publisher
+        }
+
+
+    }
+
+    private fun setImage(url: String, imageView: ImageView) {
+        Picasso.get()
+            .load(url)
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .fit()
+            .error(R.drawable.hero_error_image)
+            .into(imageView)
+    }
+
+    companion object {
+        const val MISS_TEXT = "-"
     }
 }
