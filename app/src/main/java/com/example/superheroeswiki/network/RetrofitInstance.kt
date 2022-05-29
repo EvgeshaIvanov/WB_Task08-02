@@ -1,4 +1,4 @@
-package com.example.superheroeswiki
+package com.example.superheroeswiki.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,7 +13,7 @@ object RetrofitInstance {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-    val api: RetrofitServices by lazy {
-        retrofit.create(RetrofitServices::class.java)
+    val api: ApiService by lazy {
+        retrofit.create(ApiService::class.java)
     }
 }

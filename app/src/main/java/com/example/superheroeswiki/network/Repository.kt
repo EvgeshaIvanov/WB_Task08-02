@@ -1,5 +1,6 @@
-package com.example.superheroeswiki
+package com.example.superheroeswiki.network
 
+import com.example.superheroeswiki.model.HeroResults
 import retrofit2.Response
 
 class Repository {
