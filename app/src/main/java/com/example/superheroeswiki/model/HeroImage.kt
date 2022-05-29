@@ -7,9 +7,8 @@ import com.google.gson.annotations.SerializedName
 data class HeroImage(
     @SerializedName("url")
     val url: String
-): Parcelable {
-    constructor(parcel: Parcel) : this(parcel.readString()!!) {
-    }
+) : Parcelable {
+    constructor(parcel: Parcel) : this(parcel.readString()!!)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(url)

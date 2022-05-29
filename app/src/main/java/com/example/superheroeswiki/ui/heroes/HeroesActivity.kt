@@ -1,17 +1,19 @@
-package com.example.superheroeswiki
+package com.example.superheroeswiki.ui.heroes
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.superheroeswiki.databinding.ActivityMainBinding
+import com.example.superheroeswiki.MainViewModel
+import com.example.superheroeswiki.MainViewModelFactory
+import com.example.superheroeswiki.databinding.ActivityHeroesMainBinding
 import com.example.superheroeswiki.network.Repository
+import com.example.superheroeswiki.ui.heroDetail.HeroDetailActivity
 
-class MainActivity : AppCompatActivity() {
+class HeroesActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityHeroesMainBinding
 
     private lateinit var viewModel: MainViewModel
 
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityHeroesMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initViewModel()
@@ -27,9 +29,8 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
 
         heroesAdapter.onClickHeroListener = { hero ->
-            Log.i("HERO_CLICK_INFO", "${hero.name}, full name - ${hero.biography.fullName}")
             val intent = Intent(this, HeroDetailActivity::class.java)
-            intent.putExtra("HERO_NAME", hero)
+            intent.putExtra(HERO_DETAILS, hero)
 
             startActivity(intent)
         }
@@ -51,8 +52,12 @@ class MainActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         heroesAdapter = HeroesAdapter()
         binding.recyclerViewHeroes.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(this@HeroesActivity)
             adapter = heroesAdapter
         }
+    }
+
+    companion object {
+        const val HERO_DETAILS = "HERO"
     }
 }

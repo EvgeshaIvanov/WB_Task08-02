@@ -11,9 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SuperheroesWiki">
-        <activity android:name=".HeroDetailActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.heroDetail.HeroDetailActivity"
+            android:parentActivityName=".ui.heroes.HeroesActivity" />
+        <activity
+            android:name=".ui.heroes.HeroesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

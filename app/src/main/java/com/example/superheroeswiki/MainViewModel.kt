@@ -8,13 +8,13 @@ import com.example.superheroeswiki.network.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class MainViewModel(private val repository: Repository): ViewModel() {
+class MainViewModel(private val repository: Repository) : ViewModel() {
 
     val heroesList: MutableLiveData<Response<HeroResults>> = MutableLiveData()
 
-    fun getAllHeroes(){
+    fun getAllHeroes() {
         viewModelScope.launch {
-            val list =repository.getCharacter()
+            val list = repository.getCharacter()
             heroesList.value = list
         }
     }

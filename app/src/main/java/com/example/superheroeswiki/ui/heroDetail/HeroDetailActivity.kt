@@ -1,8 +1,10 @@
-package com.example.superheroeswiki
+package com.example.superheroeswiki.ui.heroDetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import com.example.superheroeswiki.R
+import com.example.superheroeswiki.ui.heroes.HeroesActivity.Companion.HERO_DETAILS
 import com.example.superheroeswiki.databinding.ActivityHeroDetailBinding
 import com.example.superheroeswiki.model.HeroData
 import com.squareup.picasso.Picasso
@@ -15,23 +17,28 @@ class HeroDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHeroDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val heroDetails = intent.getParcelableExtra<HeroData>("HERO_NAME")!!
+        val heroDetails = intent.getParcelableExtra<HeroData>(HERO_DETAILS)!!
 
+        initHeroDetails(heroDetails)
+
+    }
+
+    private fun initHeroDetails(heroDetails: HeroData) {
         binding.apply {
             setImage(heroDetails.image.url, heroImage)
             heroName.text = heroDetails.name
-            if (heroDetails.biography.fullName.contains("")) {
+            if (heroDetails.biography.fullName == "") {
                 fullNameHeroInfo.text = MISS_TEXT
             } else fullNameHeroInfo.text = heroDetails.biography.fullName
             genderInfo.text = heroDetails.appearance.gender
-            if (heroDetails.appearance.race.contains("null")) {
+            if (heroDetails.appearance.race == "null") {
                 raceInfo.text = MISS_TEXT
             } else raceInfo.text = heroDetails.appearance.race
             placeOfBirthInfo.text = heroDetails.biography.placeOfBirth
-            publisherInfo.text = heroDetails.biography.publisher
+            if (heroDetails.biography.publisher == "") {
+                publisherInfo.text = MISS_TEXT
+            } else publisherInfo.text = heroDetails.biography.publisher
         }
-
-
     }
 
     private fun setImage(url: String, imageView: ImageView) {

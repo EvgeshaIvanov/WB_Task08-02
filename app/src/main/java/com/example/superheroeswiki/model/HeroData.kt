@@ -17,8 +17,7 @@ data class HeroData(
         parcel.readParcelable(HeroBiographyData::class.java.classLoader)!!,
         parcel.readParcelable(HeroImage::class.java.classLoader)!!,
         parcel.readParcelable(HeroAppearanceData::class.java.classLoader)!!
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)

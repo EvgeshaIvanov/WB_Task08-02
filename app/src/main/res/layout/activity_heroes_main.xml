@@ -4,16 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.heroes.HeroesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHeroes"
         android:layout_width="match_parent"
-        tools:listitem="@layout/item_list_main"
         android:layout_height="match_parent"
+        android:scrollbarSize="3dp"
+        android:scrollbarThumbVertical="@color/white"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_list_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
