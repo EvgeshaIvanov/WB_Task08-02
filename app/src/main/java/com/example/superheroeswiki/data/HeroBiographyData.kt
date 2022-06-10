@@ -1,12 +1,12 @@
-package com.example.superheroeswiki.model
+package com.example.superheroeswiki.data
 
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class HeroBiographyData(
-    @SerializedName("full-name") var fullName: String,
-    @SerializedName("place-of-birth") val placeOfBirth: String,
+    @SerializedName("fullName") var fullName: String,
+    @SerializedName("placeOfBirth") val placeOfBirth: String,
     @SerializedName("publisher") val publisher: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(

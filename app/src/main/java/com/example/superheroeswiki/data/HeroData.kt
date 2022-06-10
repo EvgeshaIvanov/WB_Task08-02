@@ -1,4 +1,4 @@
-package com.example.superheroeswiki.model
+package com.example.superheroeswiki.data
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -8,7 +8,7 @@ data class HeroData(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
     @SerializedName("biography") val biography: HeroBiographyData,
-    @SerializedName("image") val image: HeroImage,
+    @SerializedName("images") val image: HeroImage,
     @SerializedName("appearance") val appearance: HeroAppearanceData
 ) : Parcelable {
     constructor(parcel: Parcel) : this(

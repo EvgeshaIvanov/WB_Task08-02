@@ -1,4 +1,4 @@
-package com.example.superheroeswiki.model
+package com.example.superheroeswiki.data
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -6,11 +6,11 @@ import com.google.gson.annotations.SerializedName
 
 data class HeroAppearanceData(
     @SerializedName("gender") val gender: String,
-    @SerializedName("race") val race: String
+    @SerializedName("race") val race: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
-        parcel.readString()!!
+        parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

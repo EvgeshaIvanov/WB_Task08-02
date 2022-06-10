@@ -6,7 +6,7 @@ import android.widget.ImageView
 import com.example.superheroeswiki.R
 import com.example.superheroeswiki.ui.heroes.HeroesActivity.Companion.HERO_DETAILS
 import com.example.superheroeswiki.databinding.ActivityHeroDetailBinding
-import com.example.superheroeswiki.model.HeroData
+import com.example.superheroeswiki.data.HeroData
 import com.squareup.picasso.Picasso
 
 class HeroDetailActivity : AppCompatActivity() {
@@ -31,7 +31,7 @@ class HeroDetailActivity : AppCompatActivity() {
                 fullNameHeroInfo.text = MISS_TEXT
             } else fullNameHeroInfo.text = heroDetails.biography.fullName
             genderInfo.text = heroDetails.appearance.gender
-            if (heroDetails.appearance.race == "null") {
+            if (heroDetails.appearance.race == null) {
                 raceInfo.text = MISS_TEXT
             } else raceInfo.text = heroDetails.appearance.race
             placeOfBirthInfo.text = heroDetails.biography.placeOfBirth

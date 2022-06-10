@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.superheroeswiki.R
 import com.example.superheroeswiki.databinding.ItemListMainBinding
-import com.example.superheroeswiki.model.HeroData
+import com.example.superheroeswiki.data.HeroData
 import com.squareup.picasso.Picasso
 
 class HeroesAdapter : RecyclerView.Adapter<HeroesViewHolder>() {

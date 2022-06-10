@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.superheroeswiki.MainViewModel
+import com.example.superheroeswiki.MainViewModel.Companion.LOCAL_STORAGE
+import com.example.superheroeswiki.MainViewModel.Companion.REMOTE_STORAGE
 import com.example.superheroeswiki.MainViewModelFactory
 import com.example.superheroeswiki.databinding.ActivityHeroesMainBinding
 import com.example.superheroeswiki.network.Repository
 import com.example.superheroeswiki.ui.heroDetail.HeroDetailActivity
+import com.google.gson.Gson
+
 
 class HeroesActivity : AppCompatActivity() {
 
@@ -41,13 +45,23 @@ class HeroesActivity : AppCompatActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        viewModel.getAllHeroes()
-        viewModel.heroesList.observe(this) { response ->
-            if (response.isSuccessful) {
-                heroesAdapter.list = response.body()!!.results
+
+        when (viewModel.storageType()) {
+            REMOTE_STORAGE -> {
+                viewModel.heroesList.observe(this) { response ->
+                    heroesAdapter.list = response.body()!!
+                    val heroDataFromJson = Gson().toJson(response.body())
+                    viewModel.downloadDataHeroToLocalStorage(heroDataFromJson)
+                }
+            }
+            LOCAL_STORAGE -> {
+                viewModel.heroesListFromStorage.observe(this) { response ->
+                    heroesAdapter.list = response
+                }
             }
         }
     }
+
 
     private fun initRecyclerView() {
         heroesAdapter = HeroesAdapter()
