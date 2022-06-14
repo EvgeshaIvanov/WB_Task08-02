@@ -14,7 +14,11 @@ import retrofit2.Response
 import java.io.File
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
-
+    /*
+    переделать логику определения хранилища:
+    TODO сделать отдельный репозиторий и прокинуть во viewmodel
+    TODO сделать сделать одну livedata
+     */
     val heroesList: MutableLiveData<Response<List<HeroData>>> = MutableLiveData()
 
     val heroesListFromStorage: MutableLiveData<List<HeroData>> = MutableLiveData()
