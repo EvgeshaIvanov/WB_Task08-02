@@ -45,21 +45,11 @@ class HeroesActivity : AppCompatActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-
-        when (viewModel.storageType()) {
-            REMOTE_STORAGE -> {
-                viewModel.heroesList.observe(this) { response ->
-                    heroesAdapter.list = response.body()!!
-                    val heroDataFromJson = Gson().toJson(response.body())
-                    viewModel.downloadDataHeroToLocalStorage(heroDataFromJson)
-                }
-            }
-            LOCAL_STORAGE -> {
-                viewModel.heroesListFromStorage.observe(this) { response ->
-                    heroesAdapter.list = response
-                }
-            }
+        viewModel.storageType()
+        viewModel.heroesList.observe(this) {
+            heroesAdapter.list = it
         }
+
     }
 
 

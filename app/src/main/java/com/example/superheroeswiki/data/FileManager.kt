@@ -11,6 +11,7 @@ import java.lang.reflect.Type
 object FileManager {
 
     private const val PREFERENCES_HEROES_FILE_NAME = "HeroesDataStorageSP"
+
     const val PREF_HEROES_VALUE = "PREF_HEROES_VALUE"
 
     lateinit var sharedPreferences: SharedPreferences

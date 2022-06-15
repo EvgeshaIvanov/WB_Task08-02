@@ -8,24 +8,22 @@ import com.example.superheroeswiki.data.FileManager
 import com.example.superheroeswiki.data.FileManager.PREF_HEROES_VALUE
 import com.example.superheroeswiki.data.HeroData
 import com.example.superheroeswiki.network.Repository
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import java.io.File
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
-    /*
-    переделать логику определения хранилища:
-    TODO сделать отдельный репозиторий и прокинуть во viewmodel
-    TODO сделать сделать одну livedata
-     */
-    val heroesList: MutableLiveData<Response<List<HeroData>>> = MutableLiveData()
 
-    val heroesListFromStorage: MutableLiveData<List<HeroData>> = MutableLiveData()
+    val heroesList: MutableLiveData<List<HeroData>> = MutableLiveData()
+
+    var value: String? = null
 
     private fun getHeroesDataFromRemoteStorage() {
         viewModelScope.launch {
-            val list = repository.getCharacter()
+            val response = repository.getCharacter()
+            val list = response.body()
+            value = Gson().toJson(response.body())
             heroesList.value = list
         }
     }
@@ -33,18 +31,18 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     private fun getHeroesDataFromLocalStorage() {
         viewModelScope.launch(Dispatchers.IO) {
             val list = FileManager.getHeroDataFromStorage(PREF_HEROES_VALUE)
-            heroesListFromStorage.postValue(list)
+            heroesList.postValue(list)
         }
     }
 
-    fun downloadDataHeroToLocalStorage(value: String) {
+    private fun downloadDataHeroToLocalStorage(value: String) {
         viewModelScope.launch(Dispatchers.IO) {
             FileManager.setHeroDataToStorage(PREF_HEROES_VALUE, value)
         }
     }
 
 
-    fun storageType(): Int {
+    fun storageType() {
         val result: Int
         val file = File(FILE_PATH)
         result = if (!file.exists()) {
@@ -54,9 +52,11 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         }
         when (result) {
             LOCAL_STORAGE -> getHeroesDataFromLocalStorage()
-            REMOTE_STORAGE -> getHeroesDataFromRemoteStorage()
+            REMOTE_STORAGE -> {
+                getHeroesDataFromRemoteStorage()
+                value?.let { downloadDataHeroToLocalStorage(it) }
+            }
         }
-        return result
     }
 
     companion object {

@@ -27,7 +27,7 @@ class HeroDetailActivity : AppCompatActivity() {
         binding.apply {
             setImage(heroDetails.image.url, heroImage)
             heroName.text = heroDetails.name
-            if (heroDetails.biography.fullName == "") {
+            if (heroDetails.biography.fullName == EMPTY_TEXT) {
                 fullNameHeroInfo.text = MISS_TEXT
             } else fullNameHeroInfo.text = heroDetails.biography.fullName
             genderInfo.text = heroDetails.appearance.gender
@@ -35,7 +35,7 @@ class HeroDetailActivity : AppCompatActivity() {
                 raceInfo.text = MISS_TEXT
             } else raceInfo.text = heroDetails.appearance.race
             placeOfBirthInfo.text = heroDetails.biography.placeOfBirth
-            if (heroDetails.biography.publisher == "") {
+            if (heroDetails.biography.publisher == EMPTY_TEXT) {
                 publisherInfo.text = MISS_TEXT
             } else publisherInfo.text = heroDetails.biography.publisher
         }
@@ -52,5 +52,6 @@ class HeroDetailActivity : AppCompatActivity() {
 
     companion object {
         const val MISS_TEXT = "-"
+        const val EMPTY_TEXT = ""
     }
 }
