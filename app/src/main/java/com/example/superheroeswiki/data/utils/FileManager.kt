@@ -1,8 +1,9 @@
-package com.example.superheroeswiki.data
+package com.example.superheroeswiki.data.utils
 
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.superheroeswiki.data.HeroData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type

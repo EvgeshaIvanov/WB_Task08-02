@@ -1,7 +1,7 @@
 package com.example.superheroeswiki
 
 import android.app.Application
-import com.example.superheroeswiki.data.FileManager
+import com.example.superheroeswiki.data.utils.FileManager
 
 class HeroesApplication : Application() {
 
