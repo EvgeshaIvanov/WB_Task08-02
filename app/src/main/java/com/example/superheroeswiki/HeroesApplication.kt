@@ -1,7 +1,7 @@
 package com.example.superheroeswiki
 
 import android.app.Application
-import com.example.superheroeswiki.data.utils.FileManager
+import com.example.superheroeswiki.utils.FileManager
 import com.github.terrakok.cicerone.Cicerone
 
 class HeroesApplication : Application() {

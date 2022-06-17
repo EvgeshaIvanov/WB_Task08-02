@@ -1,4 +1,4 @@
-package com.example.superheroeswiki.ui.navigation
+package com.example.superheroeswiki.utils
 
 import android.os.Bundle
 import com.example.superheroeswiki.ui.aboutApp.AboutFragment
@@ -12,5 +12,5 @@ object Screens {
 
     fun aboutScreen() = FragmentScreen { AboutFragment() }
 
-    fun sendData(bundle: Bundle) = FragmentScreen { DetailHeroFragment.newInstance(bundle) }
+    fun detailScreen(bundle: Bundle) = FragmentScreen { DetailHeroFragment.newInstance(bundle) }
 }

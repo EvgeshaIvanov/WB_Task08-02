@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.superheroeswiki.data.utils.FileManager
-import com.example.superheroeswiki.data.utils.FileManager.PREF_HEROES_VALUE
+import com.example.superheroeswiki.utils.FileManager
+import com.example.superheroeswiki.utils.FileManager.PREF_HEROES_VALUE
 import com.example.superheroeswiki.data.HeroData
 import com.example.superheroeswiki.network.Repository
 import com.google.gson.Gson

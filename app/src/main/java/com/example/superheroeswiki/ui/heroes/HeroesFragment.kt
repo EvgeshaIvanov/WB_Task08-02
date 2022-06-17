@@ -12,7 +12,7 @@ import com.example.superheroeswiki.MainViewModel
 import com.example.superheroeswiki.MainViewModelFactory
 import com.example.superheroeswiki.databinding.FragmentHeroesBinding
 import com.example.superheroeswiki.network.Repository
-import com.example.superheroeswiki.ui.navigation.Screens
+import com.example.superheroeswiki.utils.Screens
 
 
 class HeroesFragment : Fragment() {
@@ -37,7 +37,7 @@ class HeroesFragment : Fragment() {
         initRecyclerView()
         heroesAdapter.onClickHeroListener = { hero ->
             val bundle = Bundle().apply { putParcelable(HERO_DETAILS, hero) }
-            HeroesApplication.INSTANCE.router.navigateTo(Screens.sendData(bundle))
+            HeroesApplication.INSTANCE.router.navigateTo(Screens.detailScreen(bundle))
         }
     }
 

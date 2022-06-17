@@ -8,7 +8,7 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.example.superheroeswiki.HeroesApplication
 import com.example.superheroeswiki.databinding.FragmentAboutBinding
-import com.example.superheroeswiki.ui.navigation.Screens
+import com.example.superheroeswiki.utils.Screens
 
 
 class AboutFragment : Fragment() {

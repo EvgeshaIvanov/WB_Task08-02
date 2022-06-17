@@ -1,4 +1,4 @@
-package com.example.superheroeswiki.data.utils
+package com.example.superheroeswiki.utils
 
 import android.app.Application
 import android.content.Context
