@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/custom_background"
-    tools:context=".ui.heroDetail.HeroDetailActivity">
+    android:background="@drawable/custom_background">
 
     <ImageView
         android:id="@+id/hero_image"

@@ -13,4 +13,9 @@
     <string name="race_info">race_info</string>
     <string name="place_of_birth_info">place_of_birth_info</string>
     <string name="publisher_info">publisher_info</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_dev">Eugene</string>
+    <string name="tg_link">https://t.me/EvgeshaOG</string>
+    <string name="date_of_create">17.06.2022</string>
 </resources>

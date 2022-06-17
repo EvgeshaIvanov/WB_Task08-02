@@ -3,7 +3,10 @@ package com.example.superheroeswiki.data
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parceler
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class HeroBiographyData(
     @SerializedName("fullName") var fullName: String,
     @SerializedName("placeOfBirth") val placeOfBirth: String,
@@ -15,23 +18,16 @@ data class HeroBiographyData(
         parcel.readString()!!
     )
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(fullName)
-        parcel.writeString(placeOfBirth)
-        parcel.writeString(publisher)
-    }
+    companion object : Parceler<HeroBiographyData> {
 
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<HeroBiographyData> {
-        override fun createFromParcel(parcel: Parcel): HeroBiographyData {
-            return HeroBiographyData(parcel)
+        override fun HeroBiographyData.write(parcel: Parcel, flags: Int) {
+            parcel.writeString(fullName)
+            parcel.writeString(placeOfBirth)
+            parcel.writeString(publisher)
         }
 
-        override fun newArray(size: Int): Array<HeroBiographyData?> {
-            return arrayOfNulls(size)
+        override fun create(parcel: Parcel): HeroBiographyData {
+            return HeroBiographyData(parcel)
         }
     }
 

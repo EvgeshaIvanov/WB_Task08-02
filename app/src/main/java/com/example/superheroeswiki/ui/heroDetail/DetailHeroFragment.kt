@@ -1,26 +1,34 @@
 package com.example.superheroeswiki.ui.heroDetail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import com.example.superheroeswiki.R
-import com.example.superheroeswiki.ui.heroes.HeroesActivity.Companion.HERO_DETAILS
-import com.example.superheroeswiki.databinding.ActivityHeroDetailBinding
 import com.example.superheroeswiki.data.HeroData
+import com.example.superheroeswiki.databinding.FragmentDetailHeroBinding
+import com.example.superheroeswiki.ui.heroes.HeroesFragment.Companion.HERO_DETAILS
 import com.squareup.picasso.Picasso
 
-class HeroDetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHeroDetailBinding
+class DetailHeroFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHeroDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val heroDetails = intent.getParcelableExtra<HeroData>(HERO_DETAILS)!!
+    private lateinit var binding: FragmentDetailHeroBinding
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentDetailHeroBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val heroDetails = arguments?.getParcelable<HeroData>(HERO_DETAILS)!!
         initHeroDetails(heroDetails)
-
     }
 
     private fun initHeroDetails(heroDetails: HeroData) {
@@ -51,7 +59,14 @@ class HeroDetailActivity : AppCompatActivity() {
     }
 
     companion object {
+        fun newInstance(bundle: Bundle): DetailHeroFragment {
+            val fragment = DetailHeroFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
+
         const val MISS_TEXT = "-"
         const val EMPTY_TEXT = ""
     }
+
 }

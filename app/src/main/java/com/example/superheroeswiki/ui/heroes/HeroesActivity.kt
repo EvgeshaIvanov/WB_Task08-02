@@ -1,67 +1,41 @@
 package com.example.superheroeswiki.ui.heroes
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.superheroeswiki.MainViewModel
-import com.example.superheroeswiki.MainViewModel.Companion.LOCAL_STORAGE
-import com.example.superheroeswiki.MainViewModel.Companion.REMOTE_STORAGE
-import com.example.superheroeswiki.MainViewModelFactory
+import com.example.superheroeswiki.HeroesApplication
+import com.example.superheroeswiki.R
 import com.example.superheroeswiki.databinding.ActivityHeroesMainBinding
-import com.example.superheroeswiki.network.Repository
-import com.example.superheroeswiki.ui.heroDetail.HeroDetailActivity
-import com.google.gson.Gson
+import com.example.superheroeswiki.ui.navigation.Screens
+import com.github.terrakok.cicerone.androidx.AppNavigator
 
 
 class HeroesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHeroesMainBinding
 
-    private lateinit var viewModel: MainViewModel
-
-    private lateinit var heroesAdapter: HeroesAdapter
+    private val navigator = AppNavigator(this, R.id.container_fragment)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHeroesMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        initViewModel()
-
-        initRecyclerView()
-
-        heroesAdapter.onClickHeroListener = { hero ->
-            val intent = Intent(this, HeroDetailActivity::class.java)
-            intent.putExtra(HERO_DETAILS, hero)
-
-            startActivity(intent)
+        setSupportActionBar(binding.toolbar)
+        binding.aboutBtn.setOnClickListener {
+            HeroesApplication.INSTANCE.router.navigateTo(Screens.aboutScreen())
         }
+        HeroesApplication.INSTANCE.router.newRootScreen(Screens.mainScreen())
 
     }
 
-    private fun initViewModel() {
-        val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        viewModel.storageType()
-        viewModel.heroesList.observe(this) {
-            heroesAdapter.list = it
-        }
-
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        HeroesApplication.INSTANCE.navigatorHolder.setNavigator(navigator)
     }
 
-
-    private fun initRecyclerView() {
-        heroesAdapter = HeroesAdapter()
-        binding.recyclerViewHeroes.apply {
-            layoutManager = LinearLayoutManager(this@HeroesActivity)
-            adapter = heroesAdapter
-        }
+    override fun onPause() {
+        HeroesApplication.INSTANCE.navigatorHolder.removeNavigator()
+        super.onPause()
     }
 
-    companion object {
-        const val HERO_DETAILS = "HERO"
-    }
 }
+
