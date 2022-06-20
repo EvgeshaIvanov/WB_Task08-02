@@ -11,7 +11,8 @@ import com.example.superheroeswiki.HeroesApplication
 import com.example.superheroeswiki.MainViewModel
 import com.example.superheroeswiki.MainViewModelFactory
 import com.example.superheroeswiki.databinding.FragmentHeroesBinding
-import com.example.superheroeswiki.network.Repository
+import com.example.superheroeswiki.network.ApiClient
+import com.example.superheroeswiki.network.NetworkRepository
 import com.example.superheroeswiki.utils.Screens
 
 
@@ -42,7 +43,7 @@ class HeroesFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val repository = Repository()
+        val repository = NetworkRepository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         viewModel.storageType()

@@ -1,19 +1,20 @@
 package com.example.superheroeswiki
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.superheroeswiki.utils.FileManager
 import com.example.superheroeswiki.utils.FileManager.PREF_HEROES_VALUE
 import com.example.superheroeswiki.data.HeroData
-import com.example.superheroeswiki.network.Repository
+import com.example.superheroeswiki.network.NetworkRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 
-class MainViewModel(private val repository: Repository) : ViewModel() {
+class MainViewModel(private val repository: NetworkRepository) : ViewModel() {
 
     val heroesList: MutableLiveData<List<HeroData>> = MutableLiveData()
 
@@ -22,9 +23,8 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     private fun getHeroesDataFromRemoteStorage() {
         viewModelScope.launch {
             val response = repository.getCharacter()
-            val list = response.body()
-            value = Gson().toJson(response.body())
-            heroesList.value = list
+            value = Gson().toJson(response)
+            heroesList.value = response
         }
     }
 

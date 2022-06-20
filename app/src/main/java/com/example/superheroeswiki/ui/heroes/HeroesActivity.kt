@@ -20,10 +20,12 @@ class HeroesActivity : AppCompatActivity() {
         binding = ActivityHeroesMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+        if (savedInstanceState == null) {
+            HeroesApplication.INSTANCE.router.newRootScreen(Screens.mainScreen())
+        }
         binding.aboutBtn.setOnClickListener {
             HeroesApplication.INSTANCE.router.newChain(Screens.aboutScreen())
         }
-        HeroesApplication.INSTANCE.router.newRootScreen(Screens.mainScreen())
 
     }
 
